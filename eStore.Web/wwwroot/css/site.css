@@ -1,4 +1,27 @@
 html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/*html {
   font-size: 14px;
 }
 
@@ -23,11 +46,11 @@ height: 100%;
 body {
     width: 100dvw;
     overflow-x: hidden;
-}
-.nav-link, .navbar-brand {
+}*/
+/*.nav-link, .navbar-brand {
     color: white !important;
-}
-.account-btns {
+}*/
+/*.account-btns {
     position: absolute;
     right: 0;
     height: 100%;
@@ -73,7 +96,7 @@ main {
 }
 *::-webkit-scrollbar {
     display: none;
-}
+}*/
 
 
 
@@ -90,3 +113,6 @@ main {
         color: #f00;
     }
 }
+
+/* Responsive grid adjustments */
+

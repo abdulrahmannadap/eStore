@@ -46,7 +46,7 @@
     </div>
 
 
-    <form class="form-marked form-disabled" method="post" asp-action="Index" asp-controller="Home" style="background-color:black">
+    <form class="form-marked form-disabled" method="post" asp-action="Index" asp-controller="Home" >
         <div class="row p-0 mx-0 py-4">
 
             <div class="col-12 col-md-5  offset-md-1 pl-2  pr-2 pr-md-0">
@@ -99,12 +99,18 @@
         </div>
 
     </form>
-  
-    @foreach (var product in Model.ProductList!)
-    {
+    <div class="container">
+        <div class="row g-4">
+            @foreach (var product in Model.ProductList!)
+            {
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex">
+                    <partial name="_ProductCard" model="product" />
+                </div>
+            }
+        </div>
+    </div>
 
-        <partial name="_ProductCard" model="product" />
-    }
+
 
 </div>
 
