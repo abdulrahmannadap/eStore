@@ -1,0 +1,66 @@
+﻿@model eStore.Domain.Entity.Product
+<div class="row">
+	<div class="col-xxl-12">
+		<div class="card mb-4" style="text-align: left !important;">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<h5 class="card-title mb-0 text-danger">Delete Product</h5>
+				<a asp-action="Index" asp-controller="Product" class="btn btn-outline-warning">
+					<i class="bi bi-arrow-left-square"></i>
+				</a>
+			</div>
+			<form asp-action="DeleteConfirm" asp-controller="Product" enctype="multipart/form-data">
+				<input type="hidden" asp-for="Id" />
+				<div class="card-body">
+					<div class="row g-3">
+						<div class="col-md-9">
+							<div class="form-floating">
+								<input type="text" asp-for="Name" class="form-control" disabled placeholder="" />
+								<label asp-for="Name"></label>
+							</div>
+
+							<div class="form-floating">
+								<input type="text" asp-for="ShortDescription" class="form-control" disabled placeholder="" />
+								<label asp-for="ShortDescription"></label>
+							</div>
+
+							<div class="form-floating">
+								<input type="text" asp-for="Price" class="form-control" disabled placeholder="" />
+								<label asp-for="Price"></label>
+							</div>
+
+							<div class="form-floating">
+								<input type="text" asp-for="LongDescription" class="form-control" disabled placeholder="" />
+								<label asp-for="LongDescription"></label>
+							</div>
+
+							<div class="form-floating">
+								<input type="text" asp-for="Brand" class="form-control" disabled placeholder="" />
+								<label asp-for="Brand"></label>
+							</div>
+
+							<div class="form-floating">
+								<input type="text" asp-for="Stock" class="form-control" disabled placeholder="" />
+								<label asp-for="Stock"></label>
+							</div>
+						</div>
+
+						<div class="col-md-3">
+							<img src="@Model.ImageURL" width="100%" style="border-radius: 5px; border: 2px solid grey" />
+						</div>
+					</div>
+				</div>
+
+				<div class="card-footer">
+					<div class="d-flex gap-2 justify-content-end">
+						<a asp-action="Index" asp-controller="Product" class="btn btn-outline-warning">
+							<i class="bi bi-x-circle me-1"></i> CANCEL
+						</a>
+						<button type="submit" class="btn btn-sm btn-danger">
+							<i class="bi bi-trash me-1"></i> DELETE
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,72 @@
+﻿@model LoginVM
+
+<div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8">
+        <div class="card shadow-lg">
+            <div class="card-body p-4">
+                <h1 class="fs-4 text-center fw-bold mb-4">Login</h1>
+                <p class="fs-6 mb-3 text-center text-muted">Please enter your email and password to log in.</p>
+
+                <form method="post" class="needs-validation" novalidate autocomplete="off">
+                    <div class="mb-3">
+                        <label class="mb-2 text-muted" for="email">E-Mail Address</label>
+                        <div class="input-group">
+                            <input id="email" asp-for="Email" type="email" placeholder="Enter Email" class="form-control" name="email" required autofocus>
+                            <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                            <div class="invalid-feedback">Email is invalid</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <label class="text-muted" for="password">Password</label>
+                            <a  class="small text-decoration-none">Forgot Password?</a>
+                        </div>
+                        <div class="input-group">
+                            <input type="password" asp-for="Password" class="form-control" placeholder="Your password" required>
+                            <span class="input-group-text"><i class="bi bi-eye-fill"></i></span>
+                            <div class="invalid-feedback">Password required</div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div class="form-check">
+                            <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                            <label for="remember" class="form-check-label">Remember Me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary ms-auto">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center my-3 text-muted">— OR —</div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">
+                        <i class="bi bi-facebook me-2"></i> Login with Facebook
+                    </button>
+                    <button class="btn btn-danger" type="button">
+                        <i class="bi bi-google me-2"></i> Login with Google
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-footer text-center py-3 border-0">
+                Don't have an account yet?
+                <a asp-action="Register" asp-controller="Account" asp-route-retrunUrl="@Model.RedirectURL" class="text-decoration-none fw-bold">Create an account</a>
+            </div>
+        </div>
+
+        <div class="text-center mt-4 text-muted small">
+            &copy; @DateTime.Now.Year — eKart
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}

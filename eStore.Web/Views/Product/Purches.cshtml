@@ -1,0 +1,75 @@
+﻿@model List<eStore.Domain.Entity.Order>
+@{
+    ViewData["Title"] = "Purches";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+	<div class="col-xxl-12">
+		<div class="card mb-4">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<h5 class="card-title mb-0">Purches Orders List</h5>
+				<div class="header-actions">
+				
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					@if (!Model.Any())
+					{
+						<div class="alert alert-info mb-0">No Purches orders found.</div>
+					}
+					else
+					{
+						<table id="mainTableFormate" class="table table-sm table-bordered table-striped table-hover table-responsive align-middle">
+							<thead class="table-dark">
+								<tr>
+									<th>#</th>
+									<th>Public ID</th>
+									<th>Date </th>
+									<th>Product</th>
+									<th>Price</th>
+									<th>Status</th>
+									<th>Order Date</th>
+									<th>User ID</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for (int i = 0; i < Model.Count; i++)
+								{
+									<tr>
+										<td>@(i + 1)</td>
+										<td>@Model[i].PublicId</td>
+										<td>@Model[i].OrderDate</td>
+
+										<td>@Model[i].Product?.Name</td>
+										<td>$@Model[i].Product?.Price.ToString("0.00")</td>
+										<td class="text-center">
+											@if (Model[i].Status == "Paid")
+											{
+												<span class="badge bg-success">Paid</span>
+											}
+											else if (Model[i].Status == "Canceled")
+											{
+												<span class="badge bg-danger">Canceled</span>
+											}
+											else
+											{
+												<span class="badge bg-secondary">@Model[i].Status</span>
+											}
+										</td>
+										<td>@Model[i].OrderDate.ToString("yyyy-MM-dd")</td>
+										<td>@Model[i].UserId</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

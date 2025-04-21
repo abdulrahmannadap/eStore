@@ -1,0 +1,147 @@
+﻿@model HomeVM
+@{
+    var images = ViewBag.ProductImages as List<string>;
+}
+<style>
+    .carousel-img {
+        height: 300px; /* Fixed height */
+        object-fit: contain; /* Ensures the whole image is visible */
+    }
+</style>
+
+
+<div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+        <div class="carousel-indicators">
+            @for (int i = 0; i < images!.Count; i++)
+            {
+                <button type="button"
+                        data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide-to="@i"
+                        class="@(i == 0 ? "active" : "")"
+                        aria-current="@(i == 0 ? "true" : "false")"
+                        aria-label="Slide @(i + 1)">
+                </button>
+            }
+        </div>
+
+        <div class="carousel-inner">
+            @for (int i = 0; i < images.Count; i++)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <img src="@Url.Content($"~/images/ImageSilder/{images[i]}")" class="d-block w-100 carousel-img" alt="Slide @(i + 1)">
+                </div>
+            }
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    <form class="form-marked form-disabled" method="post" asp-action="Index" asp-controller="Home" style="background-color:black">
+        <div class="row p-0 mx-0 py-4">
+
+            <div class="col-12 col-md-5  offset-md-1 pl-2  pr-2 pr-md-0">
+                <div class="form-group">
+                    <label>Filter products by date</label> 
+                    <input class="form-control cc" value="Not selected" type="text" onclick="selectDate()" />
+                </div>
+            </div>
+
+            <div class="col-8 col-md-3 pl-2 pr-2">
+                <div class="form-group">
+                    <label>Rating</label>
+                    @if (Model.Rating != 0)
+                    {
+
+                        <select asp-for="Rating" class="form-select">
+                            <option value="@Model.Rating"> @Model.Rating</option>
+                            @for (int i = 0; i < 6; i++)
+                            {
+                                if (i == 0 || i == Model.Rating)
+                                    continue;
+                                <option value="@i"> @i</option>
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                        <select asp-for="Rating" class="form-select">
+                            <option selected value="@Model.Rating"> None</option>
+                            @for (int i = 0; i < 6; i++)
+                            {
+                                if (i == 0 || i == Model.Rating)
+                                    continue;
+                                <option value="@i"> @i</option>
+                            }
+                        </select>
+                    }
+                </div>
+            </div>
+
+            <div class="col-4 col-md-2 pt-4 pr-2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block">
+                        <i class="bi bi-search"></i>  &nbsp; Filter
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+  
+    @foreach (var product in Model.ProductList!)
+    {
+
+        <partial name="_ProductCard" model="product" />
+    }
+
+</div>
+
+@section Scripts {
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+    <script>
+        function selectDate(action) {
+            const dateInput = document.querySelector(".cc");
+            if (dateInput) {
+                dateInput.setAttribute("type", "date");
+                dateInput.setAttribute("name", "@Html.Raw(nameof(Model.FromDate))");
+                dateInput.setAttribute("id", "@Html.Raw(nameof(Model.FromDate))");
+            }
+        }
+
+        var clickedProducts = [];
+
+        function increaseRating(id) {
+            if (!clickedProducts.includes(id)) {
+                $.ajax({
+                    url: '@Url.Action("IncrementRating", "Home")',
+                    type: 'POST',
+                    data: {
+                        productId: id
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        clickedProducts.push(id); // Add here after successful response
+                    },
+                    error: function (err) {
+                        console.error("Error in rating update:", err);
+                    }
+                });
+            }
+        }
+    </script>
+
+}

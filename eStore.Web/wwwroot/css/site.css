@@ -1,0 +1,92 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+height: 100%;
+}
+body {
+    width: 100dvw;
+    overflow-x: hidden;
+}
+.nav-link, .navbar-brand {
+    color: white !important;
+}
+.account-btns {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    transform: translate(-15% , 0)
+}
+.account-btns a {
+    padding: 1% !important;
+    margin: 0 1dvh !important;
+   white-space: nowrap;
+   display: flex;
+}
+nav {
+    position: relative !important;
+}
+img {
+    width: 100% !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+}
+.image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+width: 30% !important;
+}
+footer {
+    background: rgb(30 , 30 , 30) !important;
+}
+.cc-img {
+    border: 0.1dvh solid transparent;
+border-radius: 50%;
+padding: 4px !important;
+margin: 0 5px !important;
+background: white;
+}
+main {
+    height: 100dvh;
+    overflow-y: scroll;
+}
+*::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+@keyframes blink {
+    0% {
+        color: #f00;
+    }
+
+    50% {
+        color: #000;
+    }
+
+    100% {
+        color: #f00;
+    }
+}

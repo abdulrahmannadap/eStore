@@ -1,0 +1,46 @@
+﻿@model IEnumerable<eStore.Domain.Entity.TargetAudience>
+
+
+
+<div class="row">
+	<div class="col-xxl-12">
+		<div class="card mb-4">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<h5 class="card-title mb-0"> Targeted audiences  </h5>
+				<div class="header-actions">
+					<a asp-action="Create" asp-controller="TargetAudience" class="btn btn-danger"> <i class="bi bi-plus-circle-fill m-1"></i> Target</a>
+
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table id="mainTableFormate" class="table table-sm  table-bordered table-striped table-hover table-responsive  align-middle">
+						<thead>
+							<tr>
+								<th>Target audience name</th>
+								<th>Description</th>
+								<th>Product Name</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (TargetAudience targetAudience in Model)
+							{
+								<tr>
+									<td >@targetAudience.Audience</td>
+									<td class="text-truncate" style="max-width: 100px;">@targetAudience.Description</td>
+									<td>@targetAudience.Product.Name</td>
+									<td>
+										<a class="btn btn-primary btn-sm" asp-controller="TargetAudience" asp-action="Edit" asp-route-id="@targetAudience.Id"><i class="bi bi-pencil-square"></i></a>
+										<a class="btn btn-danger btn-sm" asp-controller="TargetAudience" asp-action="Delete" asp-route-id="@targetAudience.Id"><i class="bi bi-trash"></i></a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

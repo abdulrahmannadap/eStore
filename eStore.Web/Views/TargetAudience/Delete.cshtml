@@ -1,0 +1,61 @@
+﻿@model eStore.Domain.Entity.TargetAudience
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="card mb-4" style="text-align: left !important;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Delete Target Audience</h5>
+                <a asp-action="Index" asp-controller="TargetAudience" class="btn btn-outline-warning">
+                    <i class="bi bi-arrow-left-square"></i>
+                </a>
+            </div>
+            <form asp-action="Delete" asp-controller="TargetAudience">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select disabled asp-for="Product_Id" class="form-select" asp-items="@ViewBag.SelectListItems">
+                                    <option disabled selected>Select Villa Name</option>
+                                </select>
+                                <label asp-for="Product_Id"></label>
+                                <span asp-validation-for="Product_Id" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input readonly type="text" asp-for="Audience" class="form-control" />
+                                <label asp-for="Audience"></label>
+                                <span asp-validation-for="Audience" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input readonly type="text" asp-for="Description" class="form-control" />
+                                <label asp-for="Description"></label>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash me-1"></i> DELETE
+                        </button>
+                        <a asp-action="Index" asp-controller="TargetAudience" class="btn btn-outline-warning">
+                            <i class="bi bi-x-circle me-1"></i> CANCEL
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

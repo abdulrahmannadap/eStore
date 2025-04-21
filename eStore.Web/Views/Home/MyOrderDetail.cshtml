@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "My Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Define random locations and modes of transport
+    var locations = new[] { "Bangalore", "Kolkata", "Mumbai", "Delhi", "Chennai", "Hyderabad", "Pune", "Ahmedabad", "Jaipur", "Lucknow" };
+    var transportModes = new[] { "by ship", "by plane", "by truck", "by train" };
+
+    // Set initial location for the customer order
+    var initialLocation = "Bhiwandi";
+
+    // Create a single random generator instance
+    var random = new Random();
+}
+
+<div class="container mt-5">
+    <h3 class="mb-4">📦 My Orders</h3>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            <strong>No orders found.</strong> Once you place an order, it'll appear here.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Order Date</th>
+                        <th>Est. Delivery</th>
+                        <th>Confirmation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@order.Product?.Name</strong>
+                                <div class="text-muted small">@order.PublicId</div>
+                            </td>
+                            <td>$@order.Product?.Price.ToString("F2")</td>
+                            <td>
+                                @if (order.Status == "Paid")
+                                {
+                                    <span class="badge bg-success">Confirmed</span>
+                                }
+                                else if (order.Status == "Canceled")
+                                {
+                                    <span class="badge bg-danger">Canceled</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                }
+                            </td>
+                            <td>@order.OrderDate.ToString("dd MMM yyyy")</td>
+                            <td>@order.OrderDate.AddDays(10).ToString("dd MMM yyyy")</td>
+                            <td>
+                                @if (order.Status == "Canceled")
+                                {
+                                    <div class="alert alert-danger">
+                                        <strong>Your order has been canceled.</strong>
+                                    </div>
+                                }
+                                else if (order.Status == "Pending")
+                                {
+                                    <div class="alert alert-info">
+                                        <strong>Your order is being processed.</strong>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-success">
+                                        <strong>Your order has been confirmed!</strong>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <h5 class="text-center">Estimated Delivery Journey in the Next 10 Days:</h5>
+            <ul class="list-group">
+                @for (int i = 1; i <= 10; i++)
+                {
+                    var fromLocation = i == 1 ? initialLocation : locations[random.Next(locations.Length)];
+                    var toLocation = locations[random.Next(locations.Length)];
+                    while (fromLocation == toLocation)
+                    {
+                        toLocation = locations[random.Next(locations.Length)];
+                    }
+                    var transportMode = transportModes[random.Next(transportModes.Length)];
+                    var currentDate = DateTime.Now.AddDays(i - 1).ToString("dd MMM yyyy");
+
+                    <li class="list-group-item" style="position: relative;">
+                        @if (i == 10)
+                        {
+                            var deliveryDate = DateTime.Now.AddDays(i - 1).ToString("dd MMM yyyy");
+                            <div class="text-center" style="animation: blink 1.5s infinite;">
+                                <strong>@deliveryDate:</strong> Order received in <strong>Lucknow</strong>, dispatched from <strong>Delhi</strong> <br>
+                                Transported <strong>@transportMode</strong> to the destination. <br>
+                                <strong>Delivered to Bhiwandi</strong> on <strong>@deliveryDate</strong>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <strong>@currentDate:</strong>
+                                Order received in <strong>@fromLocation</strong>, shipped from <strong>@toLocation</strong> <br>
+                                Transported <strong>@transportMode</strong> to the destination.
+                            </div>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+
+<style>
+    @@keyframes blink {
+        0% {
+            color: #f00;
+        }
+
+        50% {
+            color: #000;
+        }
+
+        100% {
+            color: #f00;
+        }
+    }
+</style>

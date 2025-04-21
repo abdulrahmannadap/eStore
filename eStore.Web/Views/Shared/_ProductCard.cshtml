@@ -1,0 +1,134 @@
+﻿@model Product
+<style>
+    .custom-card {
+        border-width: 5px;
+        border-radius: 5px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .custom-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+</style>
+@if(!Model.IsOrderForm) {
+
+<div id="VillasList">
+    <div class="row px-lg-5 m-lg-4 m-sm-0 px-sm-0" style="--bs-gutter-x:0">
+
+            <div class=" col-md-12 col-lg-12">
+             
+                <div class="custom-card border border-white p-2">
+                    <div class="row">
+                <div class="image-container" style="height: fit-content;">
+                    <img class="" style="border-radius:5px;" src="@Model.ImageURL">
+                </div>
+                    <div class="col-8" >
+                    <div class="d-flex justify-content-between">
+                        <p class="card-title text-warning" style="font-size:xx-large">@Model.Name</p>
+                        <div class="pt-2" onclick="increaseRating(@Model.Id)">
+                                <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target='#exampleModal-@(Model.Id)'>
+                                    <i class="bi bi-eye"></i>  Details
+                            </button>
+                        </div>  
+                    </div>
+                    <p class="card-text">
+                        @Html.Raw(Model.ShortDescription)
+                    </p>
+                    <p class="card-text">
+                        @Html.Raw(Model.LongDescription)
+                    </p>
+                </div>
+                <div class="col-12">
+                    <div class="row pb-3 pt-2">
+                        <div class="" style="width: 30% !important;">
+
+
+                            @if (!Model.IsOutOfStock)
+                            {
+
+                                <a asp-action="Index" asp-route-id="@Model.Id" asp-controller="Order" class="btn btn-success form-control btn-block">
+                                        <i class="bi bi-bag-check"></i>    Order
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-danger form-control btn-block disabled">
+                                    Out of stock!
+                                </a>
+                            }
+
+
+                        </div>
+                        <div class="col-4">
+                            <span class="">Brand : @Model.Brand </span><br />
+                            <span class=" pt-1">Stock : @(Model.IsOutOfStock ? "Out of stock!" : Model.Stock)</span><br />
+                        </div>
+                        <div class="col-4">
+                            <span class="text-warning float-end font-weight-bold pt-1" style="font-size:25px;">
+                                <span style="border-bottom:1px solid #ff6a00">
+                                    @Model.Price.ToString("c")
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+            </div>
+        </div>
+
+
+        <partial name="_ProductDetails" model="@Model" />
+    </div>
+</div>
+}
+else {
+    <div id="VillasList">
+        <div class="row px-lg-5 m-lg-4 m-sm-0 px-sm-0" style="--bs-gutter-x:0">
+
+            <div class=" col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-4 p-2">
+                        <img class="d-block w-100" style="border-radius:5px;" src="@Model.ImageURL">
+                    </div>
+                    <div class="col-8">
+                        <div class="d-flex justify-content-between">
+                            <p class="card-title text-warning" style="font-size:xx-large">@Model.Name</p>
+                          
+                        </div>
+                        <p class="card-text">
+                            @Html.Raw(Model.ShortDescription)
+                        </p>
+                        <p class="card-text">
+                            @Html.Raw(Model.LongDescription)
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <div class="row pb-3 pt-2">
+                            <div class="col-4">
+
+
+
+
+                            </div>
+                            <div class="col-4">
+                                <span class="">Brand : @Model.Brand </span><br />
+                                <span class=" pt-1">Stock : @(Model.IsOutOfStock ? "Out of stock!" : Model.Stock)</span><br />
+                            </div>
+                            <div class="col-4">
+                                <span class="text-warning float-end font-weight-bold pt-1" style="font-size:25px;">
+                                    <span style="border-bottom:1px solid #ff6a00">
+                                        @Model.Price.ToString("c")
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <partial name="_ProductDetails" model="@Model" />
+        </div>
+    </div>
+}

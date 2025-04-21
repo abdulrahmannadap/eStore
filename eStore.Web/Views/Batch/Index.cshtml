@@ -1,0 +1,49 @@
+﻿@model IEnumerable<eStore.Domain.Entity.Batch>
+
+
+
+<div class="row">
+	<div class="col-xxl-12">
+		<div class="card mb-4">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<h5 class="card-title mb-0"> Batch List  </h5>
+				<div class="header-actions">
+					<a asp-action="Create" asp-controller="Batch" class="btn btn-danger"> <i class="bi bi-plus-circle-fill m-1"></i> Add a new batch</a>
+
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table id="mainTableFormate" class="table table-sm  table-bordered table-striped table-hover table-responsive  align-middle">
+						<thead>
+							<tr>
+								<th>Batch Number</th>
+								<th>Batch Details</th>
+								<th>Belonging product</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var batch in Model)
+							{
+								<tr>
+									<td>@batch.BatchNumber</td>
+									<td>@batch.BatchDetails</td>
+									<td>@batch.Product.Name</td>
+									<td class="align-items-center">
+										<a class="btn btn-primary btn-sm" asp-controller="Batch" asp-action="Edit" asp-route-id="@batch.BatchNumber">
+											<i class="bi bi-pencil-square"></i>
+										</a>
+										<a class="btn btn-danger btn-sm" asp-controller="Batch" asp-action="Delete" asp-route-batchNumber="@batch.BatchNumber">
+											<i class="bi bi-trash"></i>
+										</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

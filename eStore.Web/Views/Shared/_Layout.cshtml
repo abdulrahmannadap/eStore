@@ -1,0 +1,156 @@
+﻿@using System.Security.Claims
+@using System.Reflection
+@using eStore.Application.Utilities
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark" style="font-size: smaller;">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - eStore.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/eStore.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css" integrity="sha512-Z/def5z5u2aR89OuzYcxmDJ0Bnd5V1cKqBEbvLOiUNWdg9PQeXVvXLI90SE4QOHGlfLqUnDNVAYyZi8UwUTmWQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- DataTables Bootstrap 5 CSS -->
+    <link href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.css" rel="stylesheet">
+
+</head>
+<body style="background: black !important;">
+    <header class="mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/Images/Logo/b61f8759-1324-4147-9979-5be1e94db392.png" style="width: 40px !important;" class="mx-1 cc-img" />eKart
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (User.IsInRole(StaticDetails.ApplicationUserRoles.Role_Seller))
+                        {
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Products
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach (var category in StaticDetails.Products.Categories)
+                                    {
+
+                                        <li>
+                                            <a class="nav-link" asp-area="" asp-controller="Home" asp-route-categoryName="@category.Value" asp-action="Index">@category.Value</a>
+                                        </li>
+                                     
+
+                                    }
+
+                                </ul>
+
+
+                            </li>
+                      
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Product mangement
+                                </a>
+                                <ul class="dropdown-menu">
+
+                                    <li>
+                                        <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" asp-area="" asp-controller="Batch" asp-action="Index">Product batches</a>
+
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" asp-area="" asp-controller="TargetAudience" asp-action="Index">Target audience</a>
+
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Purches">Purches Orders</a>
+
+                                    </li>
+                                </ul>
+
+                          
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Products
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach (var category in StaticDetails.Products.Categories)
+                                    {
+
+                                        <li>
+                                            <a class="nav-link" asp-area="" asp-controller="Home" asp-route-categoryName="@category.Value" asp-action="Index">@category.Value</a>
+                                        </li>
+                                    }
+
+                                </ul>
+
+
+                            </li>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="account-btns">
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main role="main">
+            @{
+                <partial name="_Notification"></partial>
+
+            }
+            @RenderBody()
+
+
+        </main>
+        @*        <footer class="text-center mt-auto py-3 ">
+            <div class="text-muted small">
+                &copy; @DateTime.Now.Year — eKart
+            </div>
+        </footer> *@
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.bundle.min.js" integrity="sha512-sH8JPhKJUeA9PWk3eOcOl8U+lfZTgtBXD41q6cO/slwxGHCxKcW45K4oPCUhHG7NMB4mbKEddVmPuTXtpbCbFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+
+
+    <!-- DataTables Core -->
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+
+    <!-- DataTables Bootstrap 5 Integration -->
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js"></script>
+
+    <script>
+        setTimeout(function() {
+            console.log("The project is made by vancof")
+        }, 600000 )
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

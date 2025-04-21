@@ -1,0 +1,62 @@
+﻿@model eStore.Domain.Entity.Batch
+
+<div class="row">
+    <div class="col-xxl-12">
+        <div class="card mb-4" style="text-align: left !important;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Delete Batch</h5>
+                <a asp-action="Index" asp-controller="Batch" class="btn btn-outline-warning">
+                    <i class="bi bi-arrow-left-square"></i>
+                </a>
+            </div>
+            <form asp-action="DeleteConfirm" asp-controller="Batch">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <select disabled asp-for="Product_Id" class="form-select" asp-items="@(ViewData["SelectListItem"] as IEnumerable<SelectListItem>)">
+                                    <option selected>Select Product</option>
+                                </select>
+                                <label asp-for="Product_Id"></label>
+                                <span asp-validation-for="Product_Id" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input readonly type="text"  asp-for="BatchNumber" class="form-control" />
+                                <label asp-for="BatchNumber"></label>
+                                <span asp-validation-for="BatchNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input readonly type="text"asp-for="BatchDetails" class="form-control" />
+                                <label asp-for="BatchDetails"></label>
+                                <span asp-validation-for="BatchDetails" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="d-flex gap-2 justify-content-end">
+                        <a asp-action="Index" asp-controller="Batch" class="btn btn-outline-warning">
+                            <i class="bi bi-x-circle me-1"></i> CANCEL
+                        </a>
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash3-fill me-1"></i> DELETE
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

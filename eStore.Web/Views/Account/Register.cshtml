@@ -1,0 +1,110 @@
+﻿@model RegisterVM
+
+
+<div class="row justify-content-sm-center h-90 align-items-center">
+    <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8">
+        <div class="card shadow-lg">
+            <div class="card-body p-4">
+                <h1 class="fs-4 text-center fw-bold mb-4">Register</h1>
+                <p class="fs-6 mb-3">Register to get more benefits!!</p>
+
+                <form class="row g-3 needs-validation" method="post" novalidate>
+                    <input type="hidden" asp-for="RedirectURL" />
+                   @*  <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+
+                    <div class="col-12">
+                        <label class="form-label text-muted" for="Email">Email</label>
+                        <div class="input-group">
+                            <input asp-for="Email" class="form-control" placeholder="Enter Email" required />
+                            <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                        </div>
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label text-muted" for="Name">Full Name</label>
+                        <div class="input-group">
+                            <input asp-for="Name" class="form-control" placeholder="Your Name" required />
+                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                        </div>
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label text-muted" for="PhoneNumber">Phone Number</label>
+                        <div class="input-group">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Your Phone" required />
+                            <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+                        </div>
+                        <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label text-muted" for="Password">Password</label>
+                        <div class="input-group">
+                            <input asp-for="Password" class="form-control" placeholder="Password" required />
+                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                        </div>
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label text-muted" for="ConfirmPassword">Confirm Password</label>
+                        <div class="input-group">
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" required />
+                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                        </div>
+                        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label text-muted" for="Role">Select Role</label>
+                        <select class="form-select" asp-for="Role" asp-items="Model.Rolelist" required>
+                            <option disabled selected>- Select Role -</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Role"></span>
+                    </div>
+
+                    <div class="col-12 d-flex align-items-center">
+                        <div class="form-check me-auto">
+                            <input class="form-check-input" type="checkbox"  />
+                            <label class="form-check-label" for="termsCheck">
+                                I agree to <a href="#">terms</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success ms-auto">
+                            <i class="bi bi-person-plus-fill me-1"></i> Register
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center my-3 text-muted">— OR —</div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">
+                        <i class="bi bi-facebook me-2"></i> Sign up using Facebook
+                    </button>
+                    <button class="btn btn-danger" type="button">
+                        <i class="bi bi-google me-2"></i> Sign up using Google
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-footer py-3 border-0 text-center">
+                Already have an account?
+                <a asp-action="Login" asp-controller="Account" asp-route-retrunUrl="@Model.RedirectURL" class="fw-bold text-decoration-none">Login instead</a>
+            </div>
+        </div>
+
+        <div class="text-center mt-4 text-muted small">
+            &copy; @DateTime.Now.Year — eKart
+        </div>
+      
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
