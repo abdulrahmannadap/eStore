@@ -78,9 +78,3 @@ Contributions are welcome! Feel free to open issues or pull requests.
 >![HomePage(Dark Mode)](https://github.com/user-attachments/assets/485c2462-fe4f-4a68-b720-1e5035bff4d3)
 >![HomePage(Light Mode)](https://github.com/user-attachments/assets/997c139e-ecaa-467e-9eb3-91df3fd31be9)
 >![PaymentGateway(Stripe)](https://github.com/user-attachments/assets/57ac2748-fa86-46fa-82a6-9ed7e45a4203)
-
-
-## 📄 License
-This project is licensed under the MIT License.
-
-Let me know if you'd like to add test Stripe card credentials, instructions for setting up Stripe on the backend, or how to run in production mode!
