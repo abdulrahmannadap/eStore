@@ -61,7 +61,7 @@ This project includes a demo integration of the **Stripe Checkout** system:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/eStore.git
+   git clone [https://github.com/your-username/eStore.git](https://github.com/abdulrahmannadap/eStore.git)
 2. Navigate to the eStore.Web project and run the application.
 3. Make sure your SQL Server is running and configured correctly in appsettings.json.
 4. Navigate to the eStore.Web project and run the application.
